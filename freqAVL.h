@@ -8,7 +8,13 @@
 
 using namespace std;
 
+#ifndef ASSIGNMENT_4_FREQAVL_H
+#define ASSIGNMENT_4_FREQAVL_H
+
 class TreeNode {
+
+    TreeNode();
+    TreeNode(string newWord);
 
 private:
     string item;
@@ -18,21 +24,22 @@ private:
     friend class freqAVL;
 };
 
-#ifndef ASSIGNMENT_4_FREQAVL_H
-#define ASSIGNMENT_4_FREQAVL_H
-
-
 class freqAVL {
 
 private:
     TreeNode *root;
 
-
 public:
     freqAVL();
     ~freqAVL();
 
-    void addWord();
+    int getBalance( TreeNode *node);
+    int getHeight( TreeNode *node);
+    void rotateRight( TreeNode *node);
+    void rotateLeft( TreeNode *node);
+    void balance(TreeNode *node);
+
+    void addWord(string newWord, TreeNode *node);
     void generateTree();
     void printHeight();
     void printTotalWordCount();
