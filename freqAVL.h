@@ -37,10 +37,17 @@ public:
     int getHeight( TreeNode *node);
     void rotateRight( TreeNode *node);
     void rotateLeft( TreeNode *node);
-    void balance(TreeNode *node);
+    void balance( TreeNode *node);
+
+    void findWordCount( TreeNode *node, int &count);
+    void findMostFrequent( TreeNode* node, string &item, int &count);
+    void findLeastFrequent( TreeNode* node, string &item, int &count);
+    void printInorder( TreeNode* node);
+    void totalFrequence(TreeNode* node, double &total);
+    void calculateSquareofDifferences(TreeNode* node, double average, double &stdDeviation);
 
     void addWord(string newWord, TreeNode *node);
-    void generateTree();
+    void generateTree(string fileName);
     void printHeight();
     void printTotalWordCount();
     void printWordFrequencies();
