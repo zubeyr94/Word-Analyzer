@@ -5,6 +5,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -13,10 +14,10 @@ using namespace std;
 
 class TreeNode {
 
+public:
     TreeNode();
     TreeNode(string newWord);
 
-private:
     string item;
     int count;
     TreeNode *leftChildPtr, *rightChildPtr;
@@ -42,9 +43,9 @@ public:
     void findWordCount( TreeNode *node, int &count);
     void findMostFrequent( TreeNode* node, string &item, int &count);
     void findLeastFrequent( TreeNode* node, string &item, int &count);
-    void printInorder( TreeNode* node);
+    void printInorder( TreeNode* node, ofstream file);
     void totalFrequence(TreeNode* node, double &total);
-    void calculateSquareofDifferences(TreeNode* node, double average, double &stdDeviation);
+    void calculateSquareofDifferences(TreeNode* node, double average, double &squareDiff);
 
     void addWord(string newWord, TreeNode *node);
     void generateTree(string fileName);

@@ -7,6 +7,7 @@
 #include "freqAVL.h"
 #include <fstream>
 #include "limits.h"
+#include "math.h"
 
 TreeNode::TreeNode()
 {
@@ -51,7 +52,7 @@ int freqAVL::getHeight( TreeNode *node)
 
 void freqAVL::rotateRight( TreeNode *node)
 {
-    temp = node->leftChildPtr;
+    TreeNode *temp = node->leftChildPtr;
     node->leftChildPtr = temp->rightChildPtr;
     temp->rightChildPtr = node;
 
@@ -61,7 +62,7 @@ void freqAVL::rotateRight( TreeNode *node)
 
 void freqAVL::rotateLeft( TreeNode *node)
 {
-    temp = node->rightChildPtr;
+    TreeNode *temp = node->rightChildPtr;
     node->rightChildPtr = temp->leftChildPtr;
     temp->leftChildPtr = node;
 
@@ -100,9 +101,9 @@ void findWordCount( TreeNode *node, int &count)
 {
     if(node != NULL)
     {
-        findWordCount(node->leftChildPtr);
+        findWordCount(node->leftChildPtr, count);
         count++;
-        findWordCount(node->rightChildPtr);
+        findWordCount(node->rightChildPtr, count);
     }
 }
 
@@ -110,7 +111,7 @@ void findMostFrequent( TreeNode* node, string &item, int &count)
 {
     if(node != NULL)
     {
-        findMostFrequent(node->leftChildPtr);
+        findMostFrequent(node->leftChildPtr, item, count);
 
         if (node->count > count)
         {
@@ -118,7 +119,7 @@ void findMostFrequent( TreeNode* node, string &item, int &count)
             item = node -> item;
         }
 
-        findMostFrequent(node->rightChildPtr);
+        findMostFrequent(node->rightChildPtr, item, count);
     }
 }
 
@@ -126,7 +127,7 @@ void findLeastFrequent( TreeNode* node, string &item, int &count)
 {
     if(node != NULL)
     {
-        findLeastFrequent(node->leftChildPtr);
+        findLeastFrequent(node->leftChildPtr, item, count);
 
         if (node->count < count)
         {
@@ -134,7 +135,7 @@ void findLeastFrequent( TreeNode* node, string &item, int &count)
             item = node -> item;
         }
 
-        findLeastFrequent(node->rightChildPtr);
+        findLeastFrequent(node->rightChildPtr, item, count);
     }
 }
 
@@ -142,9 +143,9 @@ void freqAVL::printInorder( TreeNode* node, ofstream file)
 {
     if( node != NULL)
     {
-        printInorder(node->leftChildPtr);
-        file << node->item + " " + node->count + "\n";
-        printInorder(node->rightChildPtr);
+        printInorder(node->leftChildPtr, file);
+        file << (node->item) + " " + (node->count) + "\n";
+        printInorder(node->rightChildPtr, file);
     }
 
 }
@@ -153,27 +154,27 @@ void freqAVL::totalFrequence(TreeNode* node, double &total)
 {
     if( node != NULL)
     {
-        printInorder(node->leftChildPtr);
+        totalFrequence(node->leftChildPtr, total);
         total = total + node->count;
-        printInorder(node->rightChildPtr);
+        totalFrequence(node->rightChildPtr, total);
     }
 }
 
-void freqAVL::calculateSquareofDifferences(TreeNode* node, double average, double &stdDeviation)
+void freqAVL::calculateSquareofDifferences(TreeNode* node, double average, double &squareDiff)
 {
     if( node != NULL)
     {
-        printInorder(node->leftChildPtr);
-        stdDeviation = stdDeviation + (average - node->count) * (average - node->count);
-        printInorder(node->rightChildPtr);
+        calculateSquareofDifferences(node->leftChildPtr, average, squareDiff);
+        squareDiff = squareDiff + (average - node->count) * (average - node->count);
+        calculateSquareofDifferences(node->rightChildPtr, average, squareDiff);
     }
 }
 
-void freqAVL::addWord(string newWord, TreeNode node)
+void freqAVL::addWord(string newWord, TreeNode *node)
 {
     if( node == NULL)
     {
-        node = new Treenode(newWord);
+        node = new TreeNode(newWord);
     }
 
     else
@@ -184,7 +185,7 @@ void freqAVL::addWord(string newWord, TreeNode node)
             balance(node);
         }
 
-        else if( newWord.compare(node->item) = 0)
+        else if( newWord.compare(node->item) == 0)
         {
             node->count++;
         }
@@ -299,11 +300,11 @@ void freqAVL::printStandartDeviation()
     totalFrequence(root, total);
 
     double average = total/count;
-    double stdDeviation = 0;
-    calculateSquareofDifferences(root, average, stdDeviation);
+    double squareDiff = 0;
+    calculateSquareofDifferences(root, average, squareDiff);
 
     ofstream file;
     file.open ("statistics.txt");
-    file << "Standart Deviation: " + sqrt(stdDeviation) + "\n";
+    file << "Standart Deviation: " + itoa(sqrt(squareDiff/count)) + "\n";
     file.close();
 }

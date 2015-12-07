@@ -5,10 +5,14 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include "freqAVL.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
-    return 0;
+
+    freqAVL avl();
+
+    avl.generateTree("");
 }
