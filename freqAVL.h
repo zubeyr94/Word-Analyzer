@@ -36,14 +36,14 @@ public:
 
     int getBalance( TreeNode *node);
     int getHeight( TreeNode *node);
-    void rotateRight( TreeNode *node);
-    void rotateLeft( TreeNode *node);
+    void rotateRight( TreeNode* &node);
+    void rotateLeft( TreeNode* &node);
     void balance( TreeNode *node);
 
     void findWordCount( TreeNode *node, int &count);
     void findMostFrequent( TreeNode* node, string &item, int &count);
     void findLeastFrequent( TreeNode* node, string &item, int &count);
-    void printInorder( TreeNode* node, ofstream file);
+    void printInorder( TreeNode* node, ofstream &file);
     void totalFrequence(TreeNode* node, double &total);
     void calculateSquareofDifferences(TreeNode* node, double average, double &squareDiff);
 

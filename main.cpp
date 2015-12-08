@@ -12,7 +12,9 @@ using namespace std;
 
 int main() {
 
-    freqAVL avl();
+    freqAVL avl;
 
-    avl.generateTree("");
+    avl.generateTree("Dubliners.txt");
+    avl.printWordFrequencies();
+
 }

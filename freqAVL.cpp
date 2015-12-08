@@ -5,6 +5,7 @@
 //
 
 #include "freqAVL.h"
+#include <cstdio>
 #include <fstream>
 #include "limits.h"
 #include "math.h"
@@ -50,7 +51,7 @@ int freqAVL::getHeight( TreeNode *node)
     return 0;
 }
 
-void freqAVL::rotateRight( TreeNode *node)
+void freqAVL::rotateRight( TreeNode* &node)
 {
     TreeNode *temp = node->leftChildPtr;
     node->leftChildPtr = temp->rightChildPtr;
@@ -60,7 +61,7 @@ void freqAVL::rotateRight( TreeNode *node)
     temp = NULL;
 }
 
-void freqAVL::rotateLeft( TreeNode *node)
+void freqAVL::rotateLeft( TreeNode* &node)
 {
     TreeNode *temp = node->rightChildPtr;
     node->rightChildPtr = temp->leftChildPtr;
@@ -97,7 +98,7 @@ void freqAVL::balance(TreeNode *node)
 
 }
 
-void findWordCount( TreeNode *node, int &count)
+void freqAVL::findWordCount( TreeNode *node, int &count)
 {
     if(node != NULL)
     {
@@ -107,7 +108,7 @@ void findWordCount( TreeNode *node, int &count)
     }
 }
 
-void findMostFrequent( TreeNode* node, string &item, int &count)
+void freqAVL::findMostFrequent( TreeNode* node, string &item, int &count)
 {
     if(node != NULL)
     {
@@ -123,7 +124,7 @@ void findMostFrequent( TreeNode* node, string &item, int &count)
     }
 }
 
-void findLeastFrequent( TreeNode* node, string &item, int &count)
+void freqAVL::findLeastFrequent( TreeNode* node, string &item, int &count)
 {
     if(node != NULL)
     {
@@ -139,12 +140,12 @@ void findLeastFrequent( TreeNode* node, string &item, int &count)
     }
 }
 
-void freqAVL::printInorder( TreeNode* node, ofstream file)
+void freqAVL::printInorder( TreeNode* node, ofstream &file)
 {
     if( node != NULL)
     {
         printInorder(node->leftChildPtr, file);
-        file << (node->item) + " " + (node->count) + "\n";
+        file << (node->item) << " " << (node->count) << "\n";
         printInorder(node->rightChildPtr, file);
     }
 
@@ -244,7 +245,7 @@ void freqAVL::printHeight()
 {
     ofstream file;
     file.open ("statistics.txt");
-    file << "Tree Height: " + getHeight(root) + "\n";
+    file << "Tree Height: " << getHeight(root) << "\n";
     file.close();
 }
 
@@ -255,7 +256,7 @@ void freqAVL::printTotalWordCount()
 
     ofstream file;
     file.open ("statistics.txt");
-    file << "Total Word Count: " + count + "\n";
+    file << "Total Word Count: " << count << "\n";
     file.close();
 }
 
@@ -263,7 +264,7 @@ void freqAVL::printWordFrequencies()
 {
     ofstream file;
     file.open ("wordfreqs.txt");
-    file << "Most Frequent: " + item + " " + count + "\n";
+    printInorder(root,file);
     file.close();
 }
 
@@ -275,7 +276,7 @@ void freqAVL::printMostFrequent()
 
     ofstream file;
     file.open ("statistics.txt");
-    file << "Most Frequent: " + item + " " + count + "\n";
+    file << "Most Frequent: " << item << " " << count << "\n";
     file.close();
 }
 
@@ -287,7 +288,7 @@ void freqAVL::printLeastFrequent()
 
     ofstream file;
     file.open ("statistics.txt");
-    file << "Least Frequent: " + item + " " + count + "\n";
+    file << "Least Frequent: " << item << " " << count << "\n";
     file.close();
 }
 
@@ -305,6 +306,6 @@ void freqAVL::printStandartDeviation()
 
     ofstream file;
     file.open ("statistics.txt");
-    file << "Standart Deviation: " + itoa(sqrt(squareDiff/count)) + "\n";
+    file << "Standart Deviation: " << (sqrt(squareDiff/count)) << "\n";
     file.close();
 }
