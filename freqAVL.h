@@ -2,6 +2,7 @@
 // Zübeyr Furkan Eryýlmaz
 // 09.12.2015
 // 21202676 CS202-01
+// Assignment 4
 //
 
 #include <iostream>
@@ -38,16 +39,16 @@ public:
     int getHeight( TreeNode *node);
     void rotateRight( TreeNode* &node);
     void rotateLeft( TreeNode* &node);
-    void balance( TreeNode *node);
+    void balance( TreeNode* &node);
 
-    void findWordCount( TreeNode *node, int &count);
+    void findWordCount( TreeNode *node, long long &count);
     void findMostFrequent( TreeNode* node, string &item, int &count);
     void findLeastFrequent( TreeNode* node, string &item, int &count);
     void printInorder( TreeNode* node, ofstream &file);
     void totalFrequence(TreeNode* node, double &total);
     void calculateSquareofDifferences(TreeNode* node, double average, double &squareDiff);
 
-    void addWord(string newWord, TreeNode *node);
+    void addWord(string newWord, TreeNode* &node);
     void generateTree(string fileName);
     void printHeight();
     void printTotalWordCount();
